@@ -1,0 +1,61 @@
+name: Create release
+
+on:
+  push:
+    tags:
+      - "v*.*"
+      - "v*.*.*"
+
+jobs:
+  release:
+    name: 'Verify and publish new version'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out newly tagged version of source code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '6.0'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Run test suite
+        run: dotnet test --no-restore --verbosity normal
+
+      - name: Publish runtime-specific binaries
+        run: |
+          RUNTIMES=(
+            'linux-arm64'
+            'linux-musl-x64'
+            'linux-x64'
+            'osx-x64'
+            'win-x64'
+          )
+          APP_VERSION=${GITHUB_REF#refs/tags/v}
+          mkdir -p ./.app/runtimes
+          mkdir -p ./.app/release
+          for runtime in "${RUNTIMES[@]}"
+          do
+            dotnet publish \
+              --configuration Release \
+              --runtime "$runtime" \
+              --self-contained true \
+              --output "./.app/runtimes/$runtime" \
+              -p:Version="$APP_VERSION"
+
+            mv "./.app/runtimes/$runtime/slt" "./.app/release/slt-$runtime" || true
+            mv "./.app/runtimes/$runtime/slt.exe" "./.app/release/slt-$runtime.exe" || true
+          done
+
+      - name: Create new release on GitHub
+        uses: softprops/action-gh-release@v1
+        with:
+          body: |
+            Hopefully a bit more than just bug fixes and performance improvements.
+          files: |
+            ./.app/release/*
