@@ -5,8 +5,11 @@ Light Train (SLT)](https://trains.chuniversiteit.nl/#slt).
 ## Installation
 
 ### macOS 10.12+ / Linux (x64, ARM)
-Download the latest binary for your platform from the Releases page. Make the
-binary executable using `chmod +x $fileName` and move the binary to `/usr/local/bin/slt`.
+Paste and execute the following command in a terminal window:
+
+```
+/bin/bash -c "$(curl -L https://raw.githubusercontent.com/chunfeilung/slt/main/install.sh)"
+```
 
 ### Windows
 > :warning: slt may not display properly in cmd.exe. Please use Windows Terminal
