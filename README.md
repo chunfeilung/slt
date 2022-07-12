@@ -31,7 +31,7 @@ To view a line drawing of a Sprinter Light Train, execute `slt` with `-l`,
 slt
 ```
 
-https://user-images.githubusercontent.com/10553406/173187939-e5ef42d4-0075-40b9-ab63-fa830b59cee4.mov
+https://user-images.githubusercontent.com/10553406/178531829-434fb0a6-05e1-4a83-acd9-ed7990dac009.mp4
 
 Alternatively, you can make `slt` show a grayscale train by providing the `-f`
 or `--filled` option. This option can also be combined with the `-c` or
@@ -41,7 +41,7 @@ or `--filled` option. This option can also be combined with the `-c` or
 slt --filled --colored
 ```
 
-https://user-images.githubusercontent.com/10553406/173187953-7e0933a5-2042-460c-8b91-01e5a5ee307f.mov
+https://user-images.githubusercontent.com/10553406/178531924-d37638bd-c21f-4c5b-850a-1c369df53daa.mp4
 
 To make the train move faster or slower, provide the `--speed` or `-s` option
 with a numeric value. The speed of the train will be multiplied by the provided
@@ -51,7 +51,7 @@ value.
 slt --speed 5
 ```
 
-https://user-images.githubusercontent.com/10553406/173188082-302cf14e-e49f-414a-adaf-af715fa9128c.mov
+https://user-images.githubusercontent.com/10553406/178531977-54f0bdce-e3a3-468a-b952-23063b310758.mp4
 
 
 A complete list of supported options can be displayed by passing the `--help`
