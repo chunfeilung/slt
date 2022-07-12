@@ -1,4 +1,5 @@
 using Slt.Art.Slt;
+using Slt.Cli;
 
 namespace SltTest.Art.Slt;
 
@@ -8,7 +9,7 @@ public class SolidSltTest
     public void it_generates_train()
     {
         //> Given
-        var train = new SolidSlt();
+        var train = new SolidSlt(new AnimationConfiguration());
         var expected = File.ReadAllText("Art/Fixtures/Solid.txt");
 
         //> When

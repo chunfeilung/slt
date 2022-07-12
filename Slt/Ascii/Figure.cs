@@ -6,7 +6,7 @@ namespace Slt.Ascii;
 ///     A Figure is an ASCII art drawing that can be arbitarily cropped and combined
 ///     with other Figures.
 /// </summary>
-public readonly struct Figure
+public readonly struct Figure : ICloneable
 {
     public readonly List<string> Lines;
     public readonly string ColorMap;
@@ -164,5 +164,10 @@ public readonly struct Figure
     public override string ToString()
     {
         return string.Join("\n", Lines);
+    }
+
+    public object Clone()
+    {
+        return new Figure(Lines, ColorMap);
     }
 }

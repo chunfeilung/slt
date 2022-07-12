@@ -44,6 +44,11 @@ public static class SltCommand
         );
         speedOption.AddAlias("-s");
 
+        var sparkOption = new Option<bool>(
+            "--sparks",
+            "Generate sparks between (non-existing) overhead line and pantograph"
+        );
+
         var debugOption = new Option<bool>(
             "--debug",
             "Display static output without crops or animations"
@@ -56,30 +61,51 @@ public static class SltCommand
         command.AddOption(filledOption);
         command.AddOption(colorOption);
         command.AddOption(speedOption);
+        command.AddOption(sparkOption);
         command.AddOption(debugOption);
 
         command.SetHandler(
-            (bool useLines, bool useShapes, bool useColors, double speed, bool isDebug) =>
-            {
-                Handle(useLines, useShapes, useColors, speed, isDebug);
-            },
-            lineOption, filledOption, colorOption, speedOption, debugOption);
+            Handle,
+            lineOption,
+            filledOption,
+            colorOption,
+            speedOption,
+            sparkOption,
+            debugOption
+        );
 
         return command;
     }
 
-    private static void Handle(bool useLines, bool useShapes, bool useColors, double speed, bool isDebug)
+    private static void Handle(
+        bool useLines,
+        bool useShapes,
+        bool useColors,
+        double speed,
+        bool showSparks,
+        bool isDebug
+    )
     {
-        var animation = CreateAnimation(useLines, useShapes, useColors);
+        var config = new AnimationConfiguration
+        {
+            UseLines = useLines,
+            UseShapes = useShapes,
+            UseColors = useColors,
+            Speed = speed,
+            ShowSparks = showSparks,
+            IsDebug = isDebug
+        };
 
-        IConsole console = isDebug ? new DebugConsole() : new InteractiveConsole();
-        console.Play(animation, speed);
+        var animation = CreateAnimation(config);
+
+        IConsole console = config.IsDebug ? new DebugConsole() : new InteractiveConsole();
+        console.Play(animation, config.Speed);
     }
 
-    private static IAnimation CreateAnimation(bool useLines, bool useShapes, bool useColors)
+    private static IAnimation CreateAnimation(AnimationConfiguration config)
     {
-        return useShapes
-            ? new SolidSlt(useColors)
-            : new OutlineSlt();
+        return config.UseShapes
+            ? new SolidSlt(config)
+            : new OutlineSlt(config);
     }
 }

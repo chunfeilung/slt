@@ -40,14 +40,14 @@ public class InteractiveConsoleTest
     {
         private int _frame;
 
-        public string GetFrame(IConsole console)
+        public Figure GetFrame(IConsole console)
         {
             return new Figure("Sprinter").Crop(
                 console.GetSize().Width,
                 console.GetSize().Height,
                 _frame,
                 0
-            ).Draw();
+            );
         }
 
         public void SetFrame(int frame)

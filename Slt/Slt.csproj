@@ -19,6 +19,12 @@
     </ItemGroup>
 
     <ItemGroup>
+        <EmbeddedResource Include="Art\Etc\Outline\Colors\Sparks.txt">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Art\Etc\Outline\Sparks.txt">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </EmbeddedResource>
         <EmbeddedResource Include="Art\Slt\Solid\CollectorRoof.txt">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </EmbeddedResource>

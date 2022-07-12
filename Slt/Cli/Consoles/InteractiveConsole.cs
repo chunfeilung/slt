@@ -40,7 +40,7 @@ public sealed class InteractiveConsole : IConsole
         do
         {
             Console.SetCursorPosition(0, 0);
-            Console.Write(animation.GetFrame(this));
+            Console.Write(animation.GetFrame(this).Draw());
             animation.Advance();
             Thread.Sleep((int)(DefaultDelay / speed));
         } while (!animation.HasFinished());

@@ -80,6 +80,7 @@ public static class Colors
         return code switch
         {
             'B' => Color.MediumBlue,
+            'b' => Color.LightSkyBlue,
             'D' => Color.DimGray,
             'G' => Color.Gray,
             'L' => Color.LightGray,

@@ -1,4 +1,5 @@
 using Slt.Art.Slt;
+using Slt.Cli;
 
 namespace SltTest.Art.Slt;
 
@@ -8,7 +9,7 @@ public class OutlineSltTest
     public void it_generates_outline()
     {
         //> Given
-        var train = new OutlineSlt();
+        var train = new OutlineSlt(new AnimationConfiguration());
         var expected = File.ReadAllText("Art/Fixtures/Outline.txt");
 
         //> When

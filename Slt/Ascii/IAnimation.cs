@@ -12,7 +12,7 @@ public interface IAnimation
     /// </summary>
     /// <param name="console">Console where the frame will be displayed</param>
     /// <returns>The current frame of this animation</returns>
-    public string GetFrame(IConsole console);
+    public Figure GetFrame(IConsole console);
 
     /// <summary>
     ///     Set the animation to a specific frame

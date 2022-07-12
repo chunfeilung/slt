@@ -52,3 +52,11 @@ slt --speed 5
 ```
 
 https://user-images.githubusercontent.com/10553406/173188082-302cf14e-e49f-414a-adaf-af715fa9128c.mov
+
+
+A complete list of supported options can be displayed by passing the `--help`
+option:
+
+```
+slt --help
+```

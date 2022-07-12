@@ -7,6 +7,7 @@ namespace Slt.Art.Slt;
 public abstract class AbstractSlt : IAnimation
 {
     private readonly Figure _result;
+    private readonly IAnimation? _sparks;
     private int _frame;
 
     protected AbstractSlt(
@@ -14,7 +15,8 @@ public abstract class AbstractSlt : IAnimation
         Figure trailerCar,
         Figure collectorRoof,
         Figure fullLengthRoof,
-        Figure connection)
+        Figure connection,
+        IAnimation? sparks)
     {
         _result = new Figure()
             .AddAt(drivingCar, new Point(0, 3))
@@ -26,16 +28,26 @@ public abstract class AbstractSlt : IAnimation
             .AddAt(fullLengthRoof, new Point(254, 3))
             .AddAt(connection, new Point(348, 5))
             .AddAt(Mirror.Reflect(drivingCar), new Point(368, 3));
+        _sparks = sparks;
     }
 
-    public string GetFrame(IConsole console)
+    public Figure GetFrame(IConsole console)
     {
-        return _result.Crop(
+        var train = (Figure)_result.Clone();
+
+        if (_sparks != null)
+        {
+            train = train.AddAt(_sparks.GetFrame(console), new Point(147, 0));
+            _sparks.Advance();
+            train = train.AddAt(_sparks.GetFrame(console), new Point(152, 0));
+        }
+
+        return train.Crop(
             console.GetSize().Width,
             console.GetSize().Height,
             _frame,
             0
-        ).Draw();
+        );
     }
 
     public void SetFrame(int frame)
